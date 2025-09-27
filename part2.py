@@ -17,6 +17,7 @@ while portion_down_payment > current_savings:
     current_savings += current_savings*r/12  
     current_savings += portion_saved*(annual_salary/12)
     month +=1
+# Apply semi-annual raise every 6 months
     if month%6==0:
         annual_salary += annual_salary*semi_annual_raise
 
