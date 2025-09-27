@@ -17,57 +17,63 @@ def saving_guess (annual_salary,portion_saved):
     
     for n in range (1,T+1):
 
-        
-        # Add monthly investment return
-        current_savings += current_savings * annual_return/12  
-
         # Add monthly savings
         current_savings += portion_saved* annual_salary/12
+
+        # Add monthly investment return
+        current_savings += current_savings * annual_return/12 
         
 
          # Apply semi-annual raise
         if n%6==0:
             annual_salary *= (1 + semi_annual_raise)
 
-    return current_savings 
+    return current_savings
 
 if __name__ == '__main__':
 
     annual_salary =float(input("Enter the starting salary in Lyon: "))
 
 
-    low=0
-    high=1
+    low1=0
+    high1=1
     bisection_steps=0
+    
 
     # First check if the whole annual salary would be enough or not:
-    max_portion = (saving_guess(annual_salary,high))
+    max_portion = (saving_guess(annual_salary,high1))
 
     if portion_down_payment > max_portion :
         print("It is not possible to pay the down payment in three years.")
 
 
     else :
-        best_portion=None
+        
+        
         
         while True :
-
+            
 
             bisection_steps += 1
 
-            guess = (low+high)/2
-            save = saving_guess(annual_salary , guess)
+            guess = (low1+high1)/2
+            save = saving_guess(annual_salary, guess)
             
-
-            if abs(portion_down_payment - save) <= tolerance :
+            
+            if abs(portion_down_payment - save) <= 100 :
                 best_portion = guess
                 break
                 
             elif save > portion_down_payment:
-                    high = guess
+                    high1 = guess
+                    
 
             else :
-                    low = guess
+                    low1 = guess
+
+            
+            
                      
-        print (f"Best savings rate:{ best_portion:.4f }")
+        print (f"Best savings rate:{best_portion:.4f}")
         print(f"Steps in bisection search:{bisection_steps}")
+       
